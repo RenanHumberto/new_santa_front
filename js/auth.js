@@ -1,4 +1,4 @@
-const API_URL = 'https://santacruzsocios.netlify.app/';
+const API_URL = 'https://new-santa-back.onrender.com';
 
 async function login() {
   const email = document.getElementById('email').value;
