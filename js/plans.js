@@ -1,4 +1,4 @@
-const API_URL = 'https://seu-backend-no-render.com';
+const API_URL = 'https://santacruzsocios.netlify.app/';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const token = localStorage.getItem('token');
