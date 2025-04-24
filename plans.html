@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planos - Santa Cruz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-black text-white min-h-screen p-6">
+  <div class="max-w-6xl mx-auto">
+    <h1 class="text-3xl font-bold text-center mb-6">Faça parte do nosso SÓCIO CORAL</h1>
+    <p class="text-center mb-4">Plano atual: <span id="current-plan" class="font-semibold"></span></p>
+    <div id="error-message" class="text-red-500 text-center mb-4 hidden"></div>
+
+    <!-- Cards dos Planos -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+      <div class="bg-white text-black rounded-lg shadow-md p-6 flex flex-col justify-between h-full">
+        <div>
+          <h2 class="text-xl font-bold text-center mb-2">OURO</h2>
+          <p class="text-gray-600 text-center mb-4">SÓCIO CORAL OURO</p>
+          <ul class="list-disc list-inside mb-4 text-sm">
+            <li>Entrada gratuita no setor de cadeiras, de sociais, na arquibancada do escudo, arquibancada atrás da barra e anel superior (geral)</li>
+            <li>Desconto na Rede de Parceiro</li>
+            <li>Direito a cadastrar dependentes (filho menor de 18 anos e cônjuge)</li>
+            <li>Direito a comprar ingressos com 50% de desconto</li>
+          </ul>
+        </div>
+        <div class="text-center">
+          <p class="text-lg font-semibold mb-4">R$ 149,90/mês</p>
+          <button onclick="selectPlan('Ouro')" class="w-full py-2 rounded bg-yellow-400 hover:bg-yellow-500 text-black font-semibold" id="btn-ouro">EU QUERO</button>
+        </div>
+      </div>
+      <div class="bg-white text-black rounded-lg shadow-md p-6 flex flex-col justify-between h-full">
+        <div>
+          <h2 class="text-xl font-bold text-center mb-2">PRATA</h2>
+          <p class="text-gray-600 text-center mb-4">SÓCIO CORAL PRATA</p>
+          <ul class="list-disc list-inside mb-4 text-sm">
+            <li>Entrada gratuita no setor de sociais, na arquibancada do escudo, arquibancada atrás da barra e anel superior (geral)</li>
+            <li>Desconto na Rede de Parceiro</li>
+            <li>Direito a comprar ingressos com 50% de desconto</li>
+          </ul>
+        </div>
+        <div class="text-center">
+          <p class="text-lg font-semibold mb-4">R$ 99,90/mês</p>
+          <button onclick="selectPlan('Prata')" class="w-full py-2 rounded bg-yellow-400 hover:bg-yellow-500 text-black font-semibold" id="btn-prata">EU QUERO</button>
+        </div>
+      </div>
+      <div class="bg-white text-black rounded-lg shadow-md p-6 flex flex-col justify-between h-full">
+        <div>
+          <h2 class="text-xl font-bold text-center mb-2">BRONZE</h2>
+          <p class="text-gray-600 text-center mb-4">SÓCIO CORAL BRONZE</p>
+          <ul class="list-disc list-inside mb-4 text-sm">
+            <li>Entrada gratuita na arquibancada do escudo, arquibancada atrás da barra e anel superior (geral)</li>
+            <li>Desconto na Rede de Parceiro</li>
+            <li>Direito a comprar ingressos com 50% de desconto</li>
+          </ul>
+        </div>
+        <div class="text-center">
+          <p class="text-lg font-semibold mb-4">R$ 99,90/mês</p>
+          <button onclick="selectPlan('Bronze')" class="w-full py-2 rounded bg-yellow-400 hover:bg-yellow-500 text-black font-semibold" id="btn-bronze">EU QUERO</button>
+        </div>
+      </div>
+      <div class="bg-white text-black rounded-lg shadow-md p-6 flex flex-col justify-between h-full">
+        <div>
+          <h2 class="text-xl font-bold text-center mb-2">TORCEDOR</h2>
+          <p class="text-gray-600 text-center mb-4">SÓCIO CORAL TORCEDOR</p>
+          <ul class="list-disc list-inside mb-4 text-sm">
+            <li>50% de desconto para 1 ingresso de arquibancada</li>
+            <li>Desconto na Rede de Parceiro</li>
+          </ul>
+        </div>
+        <div class="text-center">
+          <p class="text-lg font-semibold mb-4">R$ 39,90/mês</p>
+          <button onclick="selectPlan('Torcedor')" class="w-full py-2 rounded bg-yellow-400 hover:bg-yellow-500 text-black font-semibold" id="btn-torcedor">EU QUERO</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabela de Comparação -->
+    <div>
+      <h2 class="text-2xl font-bold mb-4">Compare os Planos</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-gray-800">
+              <th class="p-3">Benefícios</th>
+              <th class="p-3">SÓCIO CORAL TORCEDOR</th>
+              <th class="p-3">SÓCIO CORAL BRONZE</th>
+              <th class="p-3">SÓCIO CORAL OURO</th>
+              <th class="p-3">SÓCIO CORAL PRATA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-700">
+              <td class="p-3">50% de desconto para 1 ingresso de arquibancada</td>
+              <td class="p-3 text-center">✔</td>
+              <td class="p-3 text-center">-</td>
+              <td class="p-3 text-center">-</td>
+              <td class="p-3 text-center">-</td>
+            </tr>
+            <tr class="border-b border-gray-700">
+              <td class="p-3">Desconto na Rede de Parceiro</td>
+              <td class="p-3 text-center">✔</td>
+              <td class="p-3 text-center">✔</td>
+              <td class="p-3 text-center">✔</td>
+              <td class="p-3 text-center">✔</td>
+            </tr>
+            <tr class="border-b border-gray-700">
+              <td class="p-3">Entrada gratuita no setor de sociais, na arquibancada do escudo, arquibancada atrás da barra e anel superior (geral)</td>
+              <td class="p-3 text-center">-</td>
+              <td class="p-3 text-center">-</td>
+              <td class="p-3 text-center">✔</td>
+              <td class="p-3 text-center">✔</td>
+            </tr>
+            <tr class="border-b border-gray-700">
+              <td class="p-3">Entrada gratuita na arquibancada do escudo, arquibancada atrás da barra e anel superior (geral)</td>
+              <td class="p-3 text-center">-</td>
+              <td class="p-3 text-center">✔</td>
+              <td class="p-3 text-center">-</td>
+              <td class="p-3 text-center">-</td>
+            </tr>
+            <tr class="border-b border-gray-700">
+              <td class="p-3">Acesso à TV Coral</td>
+              <td class="p-3 text-center">✔</td>
+              <td class="p-3 text-center">✔</td>
+              <td class="p-3 text-center">✔</td>
+              <td class="p-3 text-center">✔</td>
+            </tr>
+            <tr class="border-b border-gray-700">
+              <td class="p-3">Direito a cadastrar dependentes (filho menor de 18 anos e cônjuge)</td>
+              <td class="p-3 text-center">-</td>
+              <td class="p-3 text-center">-</td>
+              <td class="p-3 text-center">✔</td>
+              <td class="p-3 text-center">-</td>
+            </tr>
+            <tr class="border-b border-gray-700">
+              <td class="p-3">Direito a comprar ingressos com 50% de desconto</td>
+              <td class="p-3 text-center">✔</td>
+              <td class="p-3 text-center">✔</td>
+              <td class="p-3 text-center">✔</td>
+              <td class="p-3 text-center">✔</td>
+            </tr>
+            <tr class="border-b border-gray-700">
+              <td class="p-3">Entrada gratuita no setor de cadeiras, de sociais, na arquibancada do escudo, arquibancada atrás da barra e anel superior (geral)</td>
+              <td class="p-3 text-center">-</td>
+              <td class="p-3 text-center">-</td>
+              <td class="p-3 text-center">-</td>
+              <td class="p-3 text-center">✔</td>
+            </tr>
+            <tr>
+              <td class="p-3">Direito a Voto</td>
+              <td class="p-3 text-center">-</td>
+              <td class="p-3 text-center">-</td>
+              <td class="p-3 text-center">✔</td>
+              <td class="p-3 text-center">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="js/plans.js"></script>
+  <script src="js/utils.js"></script>
+</body>
+</html>

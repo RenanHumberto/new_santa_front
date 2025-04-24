@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Santa Cruz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-black text-white min-h-screen p-6">
+  <div class="max-w-2xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6">Bem-vindo ao Santa Cruz!</h1>
+    <div id="user-data" class="bg-gray-800 p-6 rounded-lg shadow-lg mb-6">
+      <p class="mb-2"><span class="font-semibold">Nome:</span> <span id="nome"></span></p>
+      <p class="mb-2"><span class="font-semibold">Email:</span> <span id="email"></span></p>
+      <p class="mb-4"><span class="font-semibold">Plano:</span> <span id="plano"></span></p>
+      <button onclick="window.location.href='plans.html'" class="bg-yellow-400 text-black p-2 rounded hover:bg-yellow-500 font-semibold">
+        Escolher ou Alterar Plano
+      </button>
+    </div>
+    <button onclick="logout()" class="bg-red-500 text-white p-2 rounded hover:bg-red-600 font-semibold">Sair</button>
+  </div>
+  <script src="js/auth.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+    // Carregar os dados do usuário ao carregar a página
+    document.addEventListener('DOMContentLoaded', async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      try {
+        const response = await fetch('https://seu-backend-no-render.com/auth/usuario', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!response.ok) throw new Error('Erro ao carregar dados do usuário');
+        const user = await response.json();
+        document.getElementById('nome').textContent = user.nome;
+        document.getElementById('email').textContent = user.email;
+        document.getElementById('plano').textContent = user.plano;
+      } catch (error) {
+        console.error(error);
+        localStorage.removeItem('token');
+        window.location.href = 'index.html';
+      }
+    });
+  </script>
+</body>
+</html>
