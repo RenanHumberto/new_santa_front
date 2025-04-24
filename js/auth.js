@@ -21,9 +21,9 @@ async function login() {
     const data = await response.json();
     if (!response.ok) throw new Error(data.message || 'Login ou senha inválidos');
 
-    console.log('Token recebido:', data.token); // Adicionar log para depuração
+    console.log('Token recebido:', data.token);
     localStorage.setItem('token', data.token);
-    console.log('Token salvo no localStorage:', localStorage.getItem('token')); // Adicionar log para depuração
+    console.log('Token salvo no localStorage:', localStorage.getItem('token'));
 
     window.location.href = 'home.html';
   } catch (error) {
@@ -31,3 +31,44 @@ async function login() {
     errorMessage.classList.remove('hidden');
   }
 }
+
+async function getUser() {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    console.log('Token não encontrado, redirecionando para login...');
+    window.location.href = 'index.html';
+    return null;
+  }
+
+  try {
+    const response = await fetch(`${API_URL}/auth/usuario`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    console.log('Resposta do backend:', response);
+
+    if (!response.ok) {
+      throw new Error('Erro ao carregar dados do usuário');
+    }
+
+    const user = await response.json();
+    console.log('Dados do usuário:', user);
+    return user;
+  } catch (error) {
+    console.error('Erro ao buscar dados do usuário:', error.message);
+    localStorage.removeItem('token');
+    window.location.href = 'index.html';
+    return null;
+  }
+}
+
+function logout() {
+  localStorage.removeItem('token');
+  window.location.href = 'index.html';
+}
+
+export { login, getUser, logout }; // Exportar para uso em outros scripts
