@@ -34,6 +34,7 @@ async function login() {
 
 async function getUser() {
   const token = localStorage.getItem('token');
+  console.log('Token no getUser (frontend):', token); // Log para depuração
   if (!token) {
     console.log('Token não encontrado, redirecionando para login...');
     window.location.href = 'index.html';
@@ -49,17 +50,19 @@ async function getUser() {
       },
     });
 
-    console.log('Resposta do backend:', response);
+    console.log('Status da resposta:', response.status); // Log para depuração
+    console.log('Resposta completa:', response); // Log para depuração
 
     if (!response.ok) {
-      throw new Error('Erro ao carregar dados do usuário');
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Erro ao carregar dados do usuário');
     }
 
     const user = await response.json();
     console.log('Dados do usuário:', user);
     return user;
   } catch (error) {
-    console.error('Erro ao buscar dados do usuário:', error.message);
+    console.error('Erro no getUser (frontend):', error.message); // Log para depuração
     localStorage.removeItem('token');
     window.location.href = 'index.html';
     return null;
@@ -71,4 +74,4 @@ function logout() {
   window.location.href = 'index.html';
 }
 
-export { login, getUser, logout }; // Exportar para uso em outros scripts
+export { login, getUser, logout };  
