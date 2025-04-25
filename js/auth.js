@@ -73,5 +73,5 @@ function logout() {
   localStorage.removeItem('token');
   window.location.href = 'index.html';
 }
-
+//aa avoid 0
 export { login, getUser, logout };

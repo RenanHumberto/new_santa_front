@@ -6,6 +6,7 @@
   <title>Login - Santa Cruz Sócios</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="manisfest" href="manifest.json">
 </head>
 <body class="bg-black text-white min-h-screen flex items-center justify-center">
   <div class="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
@@ -30,6 +31,15 @@
 
     // Adicionar listener de evento ao botão
     document.getElementById('login-button').addEventListener('click', login);
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(registration => {
+          console.log('Service Worker registrado com sucesso:', registration);
+        }).catch(error => {
+          console.error('Erro ao registrar o Service Worker:', error);
+        });
+      });
+    }
   </script>
 </body>
 </html>
