@@ -34,7 +34,7 @@ async function login() {
 
 async function getUser() {
   const token = localStorage.getItem('token');
-  console.log('Token no getUser (frontend):', token); // Log para depuração
+  console.log('Token no getUser (frontend):', token);
   if (!token) {
     console.log('Token não encontrado, redirecionando para login...');
     window.location.href = 'index.html';
@@ -50,8 +50,8 @@ async function getUser() {
       },
     });
 
-    console.log('Status da resposta:', response.status); // Log para depuração
-    console.log('Resposta completa:', response); // Log para depuração
+    console.log('Status da resposta:', response.status);
+    console.log('Resposta completa:', response);
 
     if (!response.ok) {
       const errorData = await response.json();
@@ -62,7 +62,7 @@ async function getUser() {
     console.log('Dados do usuário:', user);
     return user;
   } catch (error) {
-    console.error('Erro no getUser (frontend):', error.message); // Log para depuração
+    console.error('Erro no getUser (frontend):', error.message);
     localStorage.removeItem('token');
     window.location.href = 'index.html';
     return null;
@@ -74,4 +74,4 @@ function logout() {
   window.location.href = 'index.html';
 }
 
-export { login, getUser, logout };  
+export { login, getUser, logout };
